@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../fullcalendar.min.css' rel='stylesheet' />
+<link href='../fullcalendar.print.min.css' rel='stylesheet' media='print' />
+<script src='../lib/moment.min.js'></script>
+<script src='../lib/jquery.min.js'></script>
+<script src='../fullcalendar.min.js'></script>
+<script>
+
+	$(document).ready(function() {
+		$('#calendar').fullCalendar({
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			defaultDate: '2017-06-12',
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: [
+				{
+					title: "3D Pop Out Effect",
+           			link: "https://www.youtube.com/embed/4V8BhXU0bow",
+          		  	start: "2017-05-02",
+					constraint: 'watchedHere',
+					notes:"use the clone tool instead of brush tool at 10:34",
+					duration: "10min"
+				},
+				{
+					title: "Angular2 for beginners in easy and funny way",
+            		link: "https://www.youtube.com/embed/rOr1r1rSZQ8",
+            		start: "2017-06-3",
+					constraint: 'watchedHere',
+					notes:"start at 5:02 for commandline functions",
+					duration: "20min"
+				},
+				{
+					title: "Dispersion Effect",
+            		link: "https://www.youtube.com/embed/4xgOWWfurpU",
+            		start: "2017-05-29",
+					constraint: 'watchedHere',
+					notes:"can use for special project.",
+					duration: "30min"
+				},
+				{
+					title: "Web Development Tutorial for Beginners (#1) - How to build webpages with HTML, CSS, Javascript",
+					link:"https://www.youtube.com/embed/3JluqTojuME",
+					start: "2017-05-25",
+					constraints: "watchedHere",
+					notes: "css position functions: margin, padding, top, bottom, left right. Margin-left/margin-right (same with padding)."+
+					"<br> center text: text-alignment:center <br>\'#\' for id css, \'.\' for class css",
+					duration: "40min"
+				},
+				{
+					title:"Celine Dion - How Does A Moment Last Forever (From \"Beauty and the Beast\")",
+					link:"https://www.youtube.com/embed/YsKKuCUYUMU",
+					start:"2017-06-1",
+					constraints:'watchedHere',
+					notes: "",
+					duration: "50min"
+				},
+				{
+					title:"Big Bear - Photoshop Manipulation Tutorial",
+					link:"https://www.youtube.com/embed/b16_WCHFZXs",
+					start: "2017-06-08",
+					constraints:'watchedHere',
+					notes:"use for project x",
+					duration: "80min"
+				},
+				{
+					title:"Rosie Hardy Inspired Editing Tutorial in Photoshop",
+					link:"https://www.youtube.com/embed/1p7guQxrOqo",
+					start: "2017-06-05",
+					constraints:'watchedHere',
+					notes:"use for x part of project x",
+					duration: "70min"
+				},
+				{
+					title:"Photoshop Secrets 17: 5 Ways To Color Correct Beautifully (Remove Any Cast)",
+					link:"https://www.youtube.com/embed/9BfDEkXhXwg",
+					start: "2017-06-05",
+					constraints:'watchedHere',
+					notes:"",
+					duration: "10min"
+				}
+			],
+			
+			eventClick: function(calEvent, jsEvent, view) {
+				document.getElementById('iFrameName').src = calEvent.link;
+				document.getElementById("title").innerHTML = calEvent.title;
+				document.getElementById("note").innerHTML = "Notes: <br>"+calEvent.notes;
+				
+    		},
+			eventMouseover: function(event, jsEvent, view){
+				this.alt = event.title;
+			},
+			eventRender: function(event, element){
+				var time,color,hsl;
+				time = parseInt(event.duration);
+				hsl = ((1-(time/100))*75)+20;;
+				color = 'hsl(204,'+hsl+'%,'+hsl+'%)';
+				
+				element.css('background-color',color);
+				element.css('border-color',color);
+				
+			},
+				
+		});	
+	});
+
+
+
+</script>
+
+
+
+</head>
+<body>
+	
+		<div style = "float:left" id="calendar"></div>
+		
+		<div  class="eventsPane">
+			<h id="title" ></h>
+			<iframe id="iFrameName" class="video" style="border:none;" allowfullscreen></iframe>
+			<a id="note"></a>
+		</div>
+	
+
+</body>
+<style>
+
+	body {
+		margin: 40px 10px;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		max-width: 50%;
+		margin-left:2%;
+	}
+	.eventsPane{
+		border-style: none;
+		width:45%;
+		height:500px;
+		float:right;
+		margin-right:2%;
+	}
+
+	#title{
+		position:absolute;
+		font-size: 20px;
+		font-family:Georgia, serif;
+		font-weight:bold;
+	}
+	.video{
+		position:absolute;
+		width:30%;
+		height: 40%;
+		margin-top:5%;
+    }
+	#note{
+		position:absolute;
+		font-size:18px;
+		font-family: Georgia,serif;
+		top: 60%;
+	}
+
+</style>
+</html>
